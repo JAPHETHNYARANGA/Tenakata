@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "219265678033",
+    "project_id": "tenakata-4ad8a",
+    "storage_bucket": "tenakata-4ad8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219265678033:android:4c5ad9d9fdca846d7163f0",
+        "android_client_info": {
+          "package_name": "com.storesoko.tenakata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219265678033-gsrh3gk27alm03p4cu5uo3pboql02s7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAMZ0wUVeDMsnZbd-ld0lmo41fpCLOKjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219265678033-gsrh3gk27alm03p4cu5uo3pboql02s7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

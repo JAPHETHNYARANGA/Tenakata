@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.Tenakata"
+            android:theme="@style/NoActionBar"
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
