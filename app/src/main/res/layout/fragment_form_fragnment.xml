@@ -77,6 +77,17 @@
                android:layout_weight="1"
                android:text="Others" />
        </RadioGroup>
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="Height"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+           <EditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:inputType="number"/>
+       </com.google.android.material.textfield.TextInputLayout>
    </LinearLayout>
 
 </RelativeLayout>
