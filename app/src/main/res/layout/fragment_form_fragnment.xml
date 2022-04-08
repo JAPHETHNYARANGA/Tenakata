@@ -154,7 +154,7 @@
             android:id="@+id/choosenLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:text="Kenya"
             android:gravity="center_horizontal"/>
 
        <com.google.android.material.button.MaterialButton
