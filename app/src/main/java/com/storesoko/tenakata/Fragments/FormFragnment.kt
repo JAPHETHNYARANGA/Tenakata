@@ -1,7 +1,10 @@
 package com.storesoko.tenakata.Fragments
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +37,20 @@ class FormFragnment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data !=null){
+            //check the selected image
+                val uri = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver , uri)
+
+            val bitmapDrawable = BitmapDrawable(bitmap)
+            profile_image.setBackgroundDrawable(bitmapDrawable)
+        }
     }
 
     private fun validateForm() {
