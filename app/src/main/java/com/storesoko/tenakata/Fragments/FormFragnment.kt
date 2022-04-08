@@ -62,9 +62,14 @@ class FormFragnment : Fragment() {
             layoutIqTest.isErrorEnabled = false
             Toast.makeText(activity, "Everything is okay", Toast.LENGTH_SHORT).show()
 
+            sendDataToDb()
+
         }
     }
 
+    private fun sendDataToDb() {
+        TODO("Not yet implemented")
+    }
 
 
 }
