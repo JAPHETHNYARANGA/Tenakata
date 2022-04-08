@@ -1,5 +1,6 @@
 package com.storesoko.tenakata.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +25,12 @@ class FormFragnment : Fragment() {
 
         view.submit.setOnClickListener{
             validateForm()
+        }
+
+        view.profile_image.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent,0)
         }
 
         return view
