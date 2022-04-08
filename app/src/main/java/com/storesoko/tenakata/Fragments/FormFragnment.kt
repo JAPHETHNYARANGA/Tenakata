@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.storesoko.tenakata.R
 import kotlinx.android.synthetic.main.fragment_form_fragnment.*
@@ -109,10 +111,19 @@ class FormFragnment : Fragment() {
             .addOnSuccessListener {
                 Toast.makeText(activity,"photo uploaded successfully",Toast.LENGTH_SHORT).show()
 
-//                ref.downloadUrl.addOnSuccessListener {
-//                    it.toString()
-//                }
+                ref.downloadUrl.addOnSuccessListener {
+                    Toast.makeText(activity, " $it", Toast.LENGTH_SHORT).show()
+
+                    saveUserToFirebaseDataBase()
+                }
             }
+    }
+
+    private fun saveUserToFirebaseDataBase() {
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        ref.setValue()
     }
 
     private fun sendDataToDb() {
