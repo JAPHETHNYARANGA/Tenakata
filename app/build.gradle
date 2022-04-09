@@ -60,6 +60,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
+    //google location dependency
+    implementation "com.google.android.gms:play-services-location:19.0.1"
+
 //    //imagepicker
 //
 //    implementation 'com.github.florent37:inline-activity-result-kotlin:1.0.4'
