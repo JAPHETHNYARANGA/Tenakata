@@ -42,7 +42,7 @@ class FormFragnment : Fragment() {
             validateForm()
         }
 
-        view.profile_image.setOnClickListener {
+        view.profile_camera.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent,0)
@@ -98,6 +98,8 @@ class FormFragnment : Fragment() {
 
         return view
     }
+
+    //onresult for selected images
 
     var selectedPhotoUri:Uri? = null
 
