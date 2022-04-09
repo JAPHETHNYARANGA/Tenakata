@@ -24,7 +24,8 @@
         android:id="@+id/ListData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/pdfHost" />
+        android:layout_below="@id/pdfHost"
+        tools:listitem="@layout/individual_items_view"/>
 
 
 
