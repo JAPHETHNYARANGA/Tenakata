@@ -5,8 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ViewFragment">
 
+    <RelativeLayout
+        android:id="@+id/pdfHost"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerData"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/pdfHost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
