@@ -1,5 +1,6 @@
 package com.storesoko.tenakata.Fragments
 
+
 import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
@@ -17,12 +18,14 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.storesoko.tenakata.MainActivity
 import com.storesoko.tenakata.R
 import com.storesoko.tenakata.models.formModels
 import kotlinx.android.synthetic.main.fragment_form_fragnment.*
 import kotlinx.android.synthetic.main.fragment_form_fragnment.view.*
 import java.lang.Integer.parseInt
 import java.util.*
+
 
 private var gender: String? = null
 private var maritalStatus: String? = null
@@ -47,6 +50,7 @@ class FormFragnment : Fragment() {
             intent.type = "image/*"
             startActivityForResult(intent,0)
         }
+
 
 
     //radio gender
@@ -92,7 +96,6 @@ class FormFragnment : Fragment() {
                 }
             }
             Log.d("MaritalStatus", maritalStatus!!)
-            Toast.makeText(activity,"$maritalStatus", Toast.LENGTH_SHORT).show()
         })
 
 
@@ -118,6 +121,12 @@ class FormFragnment : Fragment() {
             profile_image.setBackgroundDrawable(bitmapDrawable)
         }
     }
+
+
+
+
+
+
 
     private fun validateForm() {
         var name = name.text.toString().trim()
@@ -178,6 +187,7 @@ class FormFragnment : Fragment() {
                 ref.downloadUrl.addOnSuccessListener {
                     Toast.makeText(activity, " $it", Toast.LENGTH_SHORT).show()
 
+
                     saveUserToFirebaseDataBase(it.toString())
                 }
             }
@@ -192,12 +202,16 @@ class FormFragnment : Fragment() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("Register", "Saved to firebase")
+
+
+                startActivity(Intent(activity, MainActivity::class.java))
             }
     }
 
 
 
 
-
-
 }
+
+
+

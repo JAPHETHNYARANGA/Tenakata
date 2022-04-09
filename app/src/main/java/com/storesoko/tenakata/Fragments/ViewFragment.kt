@@ -1,6 +1,8 @@
 package com.storesoko.tenakata.Fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.storesoko.tenakata.Adapter.myAdapter
@@ -46,11 +50,16 @@ class ViewFragment : Fragment() {
         storageReference = FirebaseStorage.getInstance().getReference("users")
 
 
+
+
         return view
     }
 
+
+
     private fun getUserData() {
         dbref = FirebaseDatabase.getInstance().getReference("users")
+
 
         dbref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -68,6 +77,8 @@ class ViewFragment : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+
+        dbref.keepSynced(true)
     }
 
 

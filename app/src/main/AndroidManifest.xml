@@ -10,7 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/tenakata"
         android:supportsRtl="true"
+        android:name=".ApplicationOffline"
         android:theme="@style/Theme.Tenakata">
+
         <activity
             android:name=".MapActivity"
             android:exported="false" />

@@ -60,5 +60,11 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
+//    //imagepicker
+//
+//    implementation 'com.github.florent37:inline-activity-result-kotlin:1.0.4'
+//    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+
+
 
 }
