@@ -25,6 +25,7 @@ import java.lang.Integer.parseInt
 import java.util.*
 
 private var gender: String? = null
+private var maritalStatus: String? = null
 
 class FormFragnment : Fragment() {
 
@@ -48,8 +49,8 @@ class FormFragnment : Fragment() {
         }
 
 
-
-       var radioGender = view.findViewById(R.id.radioGroupGender) as RadioGroup
+    //radio gender
+       val radioGender = view.findViewById(R.id.radioGroupGender) as RadioGroup
 
         radioGender.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId -> // TODO Auto-generated method stub
             val childCount = group.childCount
@@ -66,8 +67,33 @@ class FormFragnment : Fragment() {
                 }
             }
             Log.e("Gender", gender!!)
+
         })
 
+        //radio marital status
+
+        val radioMaritalStatus= view.findViewById(R.id.radioGroupMaritalStatus) as RadioGroup
+
+        radioMaritalStatus.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId -> // TODO Auto-generated method stub
+            val childCount = group.childCount
+
+            for (x in 0 until childCount) {
+                val btn = group.getChildAt(x) as RadioButton
+                if (btn.id == R.id.single) {
+                    btn.text = "Single"
+                }else if(btn.id == R.id.married) {
+                    btn.text = "Married"
+                }
+                else if (btn.id == R.id.others) {
+                    btn.text = "Others"
+                }
+                if (btn.id == checkedId) {
+                    maritalStatus = btn.text.toString() // here gender will contain M or F.
+                }
+            }
+            Log.d("MaritalStatus", maritalStatus!!)
+            Toast.makeText(activity,"$maritalStatus", Toast.LENGTH_SHORT).show()
+        })
 
 
         return view
@@ -139,15 +165,6 @@ class FormFragnment : Fragment() {
 
     private fun uploadImageToFirebaseStorage() {
 
-        val gender = view?.radioGroupGender?.setOnCheckedChangeListener { group, checkedId ->
-            if (checkedId == R.id.male)
-                Toast.makeText(activity, male.text.toString(), Toast.LENGTH_SHORT).show()
-
-
-            if (checkedId == R.id.female)
-                Toast.makeText(activity, female.text.toString(), Toast.LENGTH_SHORT).show()
-            Log.i("female", "${female.text.toString()}")
-        }
 
         if(selectedPhotoUri == null )return
         val filename = UUID.randomUUID().toString()
@@ -166,9 +183,9 @@ class FormFragnment : Fragment() {
 
     private fun saveUserToFirebaseDataBase(profileImageUrl:String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid").push()
 
-        val user = formModels(uid ,  profileImageUrl,name.text.toString(), gender, age.text.toString(),  height.text.toString(), iqTest.text.toString())
+        val user = formModels(uid ,  profileImageUrl,name.text.toString(), gender, age.text.toString(), maritalStatus, height.text.toString(), iqTest.text.toString())
 
         ref.setValue(user)
             .addOnSuccessListener {
