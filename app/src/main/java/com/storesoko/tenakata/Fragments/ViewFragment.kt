@@ -60,7 +60,7 @@ class ViewFragment : Fragment() {
                         userArrayList.add(user!!)
                     }
 
-                    userRecyclerView.adapter = myAdapter(userArrayList)
+                    userRecyclerView.adapter = context?.let { myAdapter(it,userArrayList) }
                 }
             }
 
