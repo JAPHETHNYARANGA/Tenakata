@@ -6,20 +6,25 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.storesoko.tenakata.R
+import com.storesoko.tenakata.models.formModels
 import kotlinx.android.synthetic.main.fragment_form_fragnment.*
 import kotlinx.android.synthetic.main.fragment_form_fragnment.view.*
 import java.lang.Integer.parseInt
 import java.util.*
 
+private var gender: String? = null
 
 class FormFragnment : Fragment() {
 
@@ -41,6 +46,29 @@ class FormFragnment : Fragment() {
             intent.type = "image/*"
             startActivityForResult(intent,0)
         }
+
+
+
+       var radioGender = view.findViewById(R.id.radioGroupGender) as RadioGroup
+
+        radioGender.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId -> // TODO Auto-generated method stub
+            val childCount = group.childCount
+
+            for (x in 0 until childCount) {
+                val btn = group.getChildAt(x) as RadioButton
+                if (btn.id == R.id.male) {
+                    btn.text = "Male"
+                } else {
+                    btn.text = "Female"
+                }
+                if (btn.id == checkedId) {
+                    gender = btn.text.toString() // here gender will contain M or F.
+                }
+            }
+            Log.e("Gender", gender!!)
+        })
+
+
 
         return view
     }
@@ -64,11 +92,17 @@ class FormFragnment : Fragment() {
     }
 
     private fun validateForm() {
-        val name = name.text.toString().trim()
-        val age = age.text.toString().trim()
-        val height = height.text.toString().trim()
-        val iqTest = iqTest.text.toString().trim()
-        val choosenLocation = choosenLocation.text.toString()
+        var name = name.text.toString().trim()
+        var age = age.text.toString().trim()
+        var height = height.text.toString().trim()
+        var iqTest = iqTest.text.toString().trim()
+        var choosenLocation = choosenLocation.text.toString()
+
+
+
+
+
+
 
         if(profile_image == null){
             Toast.makeText(activity, "Please Take a Picture", Toast.LENGTH_SHORT).show()
@@ -104,6 +138,17 @@ class FormFragnment : Fragment() {
     }
 
     private fun uploadImageToFirebaseStorage() {
+
+        val gender = view?.radioGroupGender?.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.male)
+                Toast.makeText(activity, male.text.toString(), Toast.LENGTH_SHORT).show()
+
+
+            if (checkedId == R.id.female)
+                Toast.makeText(activity, female.text.toString(), Toast.LENGTH_SHORT).show()
+            Log.i("female", "${female.text.toString()}")
+        }
+
         if(selectedPhotoUri == null )return
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
@@ -114,21 +159,24 @@ class FormFragnment : Fragment() {
                 ref.downloadUrl.addOnSuccessListener {
                     Toast.makeText(activity, " $it", Toast.LENGTH_SHORT).show()
 
-                    saveUserToFirebaseDataBase()
+                    saveUserToFirebaseDataBase(it.toString())
                 }
             }
     }
 
-    private fun saveUserToFirebaseDataBase() {
-        val uid = FirebaseAuth.getInstance().uid
+    private fun saveUserToFirebaseDataBase(profileImageUrl:String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        ref.setValue()
+        val user = formModels(uid ,  profileImageUrl,name.text.toString(), gender, age.text.toString(),  height.text.toString(), iqTest.text.toString())
+
+        ref.setValue(user)
+            .addOnSuccessListener {
+                Log.d("Register", "Saved to firebase")
+            }
     }
 
-    private fun sendDataToDb() {
-        TODO("Not yet implemented")
-    }
+
 
 
 
