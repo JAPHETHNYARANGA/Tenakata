@@ -185,7 +185,7 @@ class FormFragnment : Fragment() {
 
     private fun saveUserToFirebaseDataBase(profileImageUrl:String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid").push()
+        val ref = FirebaseDatabase.getInstance().getReference("/users").push()
 
         val user = formModels(uid ,  profileImageUrl,name.text.toString(), gender, age.text.toString(), maritalStatus, height.text.toString(), iqTest.text.toString())
 
