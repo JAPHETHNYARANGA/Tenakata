@@ -23,3 +23,5 @@
 * Firebase Realtimefirebase
 * Firebase Cloud Storage
 *Firebase Authentication
+  
+## How to upload to playstore and successfully installing project
