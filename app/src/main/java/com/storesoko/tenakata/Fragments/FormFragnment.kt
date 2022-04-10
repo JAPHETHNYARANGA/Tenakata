@@ -3,7 +3,9 @@ package com.storesoko.tenakata.Fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,6 +17,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -49,7 +52,10 @@ class FormFragnment : Fragment() {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent,0)
+
         }
+
+
 
 
 
@@ -165,7 +171,8 @@ class FormFragnment : Fragment() {
             layoutAge.isErrorEnabled = false
             layoutHeight.isErrorEnabled= false
             layoutIqTest.isErrorEnabled = false
-            Toast.makeText(activity, "Everything is okay", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Make sure to select image or it will not work!", Toast.LENGTH_LONG).show()
+
 
 
 
