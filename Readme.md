@@ -2,6 +2,7 @@
 
 ## Description
 <p>This is an android application used to register and shortlist individuals </p>
+<p>The application employs firebase offline features Instead of room database to avoid redundancy</p>
 
 # Installation
 ## for linux users
